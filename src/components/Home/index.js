@@ -24,6 +24,7 @@ import {
   SearchInput,
   SearchButton,
   LoaderViewContainer,
+  HomeVideosContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -115,20 +116,9 @@ class Home extends Component {
 
   displaySuccessView = () => {
     const {homeVideos} = this.state
-    return (
-      <NxtWatchContext.Consumer>
-        {value => {
-          const {isDarkTheme} = value
-          const onClickRetry = () => {
-            this.getHomeVideos()
-          }
-          return <p>Sagar</p>
-          /* return homeVideos.map(eachVideo => (
-            <VideoItem key={eachVideo.id} videoDetails={eachVideo} />
-          )) */
-        }}
-      </NxtWatchContext.Consumer>
-    )
+    return homeVideos.map(eachVideo => (
+      <VideoItem key={eachVideo.id} videoDetails={eachVideo} />
+    ))
   }
 
   renderHomeVideos = () => {
@@ -175,7 +165,9 @@ class Home extends Component {
                         <AiOutlineSearch color="#616e7c" size={20} />
                       </SearchButton>
                     </SearchContainer>
-                    {this.renderHomeVideos()}
+                    <HomeVideosContainer>
+                      {this.renderHomeVideos()}
+                    </HomeVideosContainer>
                   </SearchAndHomeContainer>
                 </BannerAndHomeContainer>
               </SidebarAndHomeContainer>

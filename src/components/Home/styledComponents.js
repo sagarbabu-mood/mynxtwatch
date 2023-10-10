@@ -56,13 +56,11 @@ export const BannerCloseButton = styled.button`
 
 export const BannerAndHomeContainer = styled.div`
   width: 100%;
-  height: ;
+  height: 86vh;
   overflow-y: auto; /* Add vertical scrollbar if content overflows */
 `
 export const SearchAndHomeContainer = styled.div`
   padding: 20px;
-  overflow-y: auto; /* Add vertical scrollbar if content overflows */
-  height: 100vh;
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
 `
 export const SearchContainer = styled.div`
@@ -104,4 +102,11 @@ export const LoaderViewContainer = styled.div`
   align-items: stretch;
   height: 400px;
   width: 100%;
+`
+
+export const HomeVideosContainer = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 0;
 `
