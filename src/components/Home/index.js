@@ -25,6 +25,16 @@ import {
   SearchButton,
   LoaderViewContainer,
   HomeVideosContainer,
+  NoSearchResultsViewContainer,
+  NoSearchResultsViewImage,
+  NoSearchResultsViewHeading,
+  NoSearchResultsViewDescription,
+  NoSearchResultsViewButton,
+  FailureViewContainer,
+  FailureViewImage,
+  FailureViewHeading,
+  FailureViewDescription,
+  FailureViewButton,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -96,7 +106,11 @@ class Home extends Component {
           <BannerButton type="button">GET IN NOW</BannerButton>
         </LeftPart>
         <BannerRight>
-          <BannerCloseButton data-testid="close" onClick={this.onClickDisplay}>
+          <BannerCloseButton
+            type="button"
+            data-testid="close"
+            onClick={this.onClickDisplay}
+          >
             <AiOutlineClose size={20} />
           </BannerCloseButton>
         </BannerRight>
@@ -114,12 +128,78 @@ class Home extends Component {
     </LoaderViewContainer>
   )
 
+  onClickRetry = () => {
+    this.getHomeVideos()
+  }
+
+  displayNoSearchResultsView = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+        return (
+          <NoSearchResultsViewContainer>
+            <NoSearchResultsViewImage
+              alt="no results"
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+            />
+            <NoSearchResultsViewHeading isDarkTheme={isDarkTheme}>
+              No Search results found
+            </NoSearchResultsViewHeading>
+            <NoSearchResultsViewDescription isDarkTheme={isDarkTheme}>
+              Try different key words or remove search filter
+            </NoSearchResultsViewDescription>
+            <NoSearchResultsViewButton
+              onClick={this.onClickRetry}
+              type="button"
+            >
+              Retry
+            </NoSearchResultsViewButton>
+          </NoSearchResultsViewContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
+
   displaySuccessView = () => {
     const {homeVideos} = this.state
-    return homeVideos.map(eachVideo => (
-      <VideoItem key={eachVideo.id} videoDetails={eachVideo} />
-    ))
+
+    if (homeVideos.length > 1) {
+      return (
+        <HomeVideosContainer>
+          {homeVideos.map(eachVideo => (
+            <VideoItem key={eachVideo.id} videoDetails={eachVideo} />
+          ))}
+        </HomeVideosContainer>
+      )
+    }
+    return this.displayNoSearchResultsView()
   }
+
+  displayFailureView = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+        const imageUrl = isDarkTheme
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+        return (
+          <FailureViewContainer>
+            <FailureViewImage src={imageUrl} alt="failure view" />
+            <FailureViewHeading isDarkTheme={isDarkTheme}>
+              Oops! Something Went Wrong
+            </FailureViewHeading>
+            <FailureViewDescription isDarkTheme={isDarkTheme}>
+              We are having some trouble to complete your request. Please try
+              again.
+            </FailureViewDescription>
+            <FailureViewButton onClick={this.onClickRetry} type="button">
+              Retry
+            </FailureViewButton>
+          </FailureViewContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
 
   renderHomeVideos = () => {
     const {apiStatus} = this.state
@@ -132,6 +212,12 @@ class Home extends Component {
         return this.displaySuccessView()
       default:
         return null
+    }
+  }
+
+  onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getHomeVideos()
     }
   }
 
@@ -152,6 +238,7 @@ class Home extends Component {
                   <SearchAndHomeContainer isDarkTheme={isDarkTheme}>
                     <SearchContainer>
                       <SearchInput
+                        onKeyDown={this.onEnterSearchInput}
                         onChange={this.onUpdateSearchInput}
                         placeholder="Search"
                         type="search"
@@ -159,15 +246,15 @@ class Home extends Component {
                         isDarkTheme={isDarkTheme}
                       />
                       <SearchButton
+                        type="button"
+                        onClick={this.onClickRetry}
                         isDarkTheme={isDarkTheme}
                         data-testid="searchButton"
                       >
                         <AiOutlineSearch color="#616e7c" size={20} />
                       </SearchButton>
                     </SearchContainer>
-                    <HomeVideosContainer>
-                      {this.renderHomeVideos()}
-                    </HomeVideosContainer>
+                    {this.renderHomeVideos()}
                   </SearchAndHomeContainer>
                 </BannerAndHomeContainer>
               </SidebarAndHomeContainer>
