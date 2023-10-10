@@ -2,15 +2,19 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 export const SidebarContainer = styled.div`
-  width: 18%;
+  width: 20%;
   height: 86vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   background-color: ${props => (props.isDarkTheme ? '#424242' : '#ffffff')};
   color: ${props => (props.isDarkTheme ? '#ffffff' : '#424242')};
   @media screen and (max-width: 768px) {
     display: none;
+  }
+  @media screen and (min-width: 800px) {
+    width: 25%;
   }
 `
 

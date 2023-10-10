@@ -7,16 +7,15 @@ export const VideoItemContainer = styled.li`
   margin-bottom: 10px;
   list-style-type: none;
   @media screen and (min-width: 576px) {
-    width: 40%;
+    width: 45%;
     margin-right: 10px;
-    flex-grow: 1;
   }
   @media screen and (min-width: 768px) {
-    width: 30%;
+    width: 31%;
     margin-right: 10px;
-    flex-grow: 1;
   }
 `
+
 export const LinkElement = styled(Link)`
   text-decoration: none;
 `

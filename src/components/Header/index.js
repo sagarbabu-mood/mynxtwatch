@@ -29,6 +29,10 @@ import {
   NavLinkElement,
   LinkContent,
   StyledLink,
+  LogoutContainer,
+  LogoutPopupText,
+  CustomButton,
+  LogoutButtonsContainer,
 } from './styledComponents'
 
 class Header extends Component {
@@ -144,20 +148,46 @@ class Header extends Component {
                     alt="profile"
                   />
                 </ProfileImageButton>
-                <LogoutImageButton
-                  onClick={this.onClickLogout}
-                  type="button"
-                  isDarkTheme={isDarkTheme}
+                <Popup
+                  modal
+                  trigger={
+                    <div>
+                      <LogoutImageButton
+                        type="button"
+                        isDarkTheme={isDarkTheme}
+                      >
+                        <FiLogOut />
+                      </LogoutImageButton>
+                      <LogoutButton type="button" isDarkTheme={isDarkTheme}>
+                        Logout
+                      </LogoutButton>
+                    </div>
+                  }
+                  className="popup-content"
                 >
-                  <FiLogOut />
-                </LogoutImageButton>
-                <LogoutButton
-                  onClick={this.onClickLogout}
-                  type="button"
-                  isDarkTheme={isDarkTheme}
-                >
-                  Logout
-                </LogoutButton>
+                  {close => (
+                    <LogoutContainer isDarkTheme={isDarkTheme}>
+                      <LogoutPopupText isDarkTheme={isDarkTheme}>
+                        Are you sure you want to logout?
+                      </LogoutPopupText>
+                      <LogoutButtonsContainer>
+                        <CustomButton
+                          type="button"
+                          outLine
+                          onClick={() => close()}
+                        >
+                          Cancel
+                        </CustomButton>
+                        <CustomButton
+                          onClick={this.onClickLogout}
+                          type="button"
+                        >
+                          Logout
+                        </CustomButton>
+                      </LogoutButtonsContainer>
+                    </LogoutContainer>
+                  )}
+                </Popup>
               </IconsContainer>
             </HeaderContainer>
           )

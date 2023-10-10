@@ -70,7 +70,7 @@ export const ProfileImageButton = styled.button`
 export const ProfileImage = styled.img`
   width: 35px;
   height: 35px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 10px;
 `
 
 export const LogoutImageButton = styled.button`
@@ -146,7 +146,6 @@ export const NavLinkElement = styled.li`
   background-color: ${props =>
     props.isLinkActive ? '#7e858e' : 'transparent'};
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#313131')};
-  //   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#313131')};
 `
 
 export const StyledLink = styled(Link)`
@@ -162,4 +161,52 @@ export const StyledLink = styled(Link)`
 export const LinkContent = styled.p`
   margin-left: 6px;
   font-size: 16px;
+`
+
+export const LogoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 20px 30px;
+  font-family: 'Roboto';
+  border-radius: 5px;
+  background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
+  box-shadow: 0px 0px 8px
+    ${props => (props.isDarkTheme ? '#ffffff' : '#181818')};
+  @media screen and (min-width: 567px) {
+    height: 150px;
+    width: 350px;
+    padding: 30px 50px;
+  }
+`
+
+export const LogoutPopupText = styled.p`
+  margin: 0;
+  color: ${props => (props.isDarkTheme ? '#ffffff' : '#181818')};
+`
+
+export const LogoutButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
+export const CustomButton = styled.button`
+  font-size: 10px;
+  font-weight: 500;
+  width: 60px;
+  height: 30px;
+  color: ${props => (props.outLine ? '#7e858e' : '#ffffff')};
+  background-color: ${props => (props.outLine ? 'transparent' : '#3b82f6')};
+  border: ${props => (props.outLine ? '1px solid #7e858e' : 'none')};
+  border-radius: 5px;
+  outline: none;
+  margin-left: 10px;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `

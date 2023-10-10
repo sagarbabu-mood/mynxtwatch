@@ -15,7 +15,7 @@ export const BannerContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
   width: 100%;
-  height: 25vh;
+  height: 30vh;
   display: ${props => props.display};
   justify-content: space-between;
   padding: 16px;
@@ -109,7 +109,7 @@ export const HomeVideosContainer = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 0;
+  padding: 10px 0 0 0;
 `
 
 export const NoSearchResultsViewContainer = styled.div`
