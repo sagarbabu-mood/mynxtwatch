@@ -103,7 +103,7 @@ class Home extends Component {
             alt="nxt watch logo"
           />
           <BannerText>Buy Nxt Watch Premium</BannerText>
-          <BannerButton type="button">GET IN NOW</BannerButton>
+          <BannerButton type="button">GET IT NOW</BannerButton>
         </LeftPart>
         <BannerRight>
           <BannerCloseButton
@@ -139,7 +139,7 @@ class Home extends Component {
         return (
           <NoSearchResultsViewContainer>
             <NoSearchResultsViewImage
-              alt="no results"
+              alt="no videos"
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
             />
             <NoSearchResultsViewHeading isDarkTheme={isDarkTheme}>
