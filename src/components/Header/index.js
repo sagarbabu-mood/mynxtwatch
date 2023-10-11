@@ -99,6 +99,7 @@ class Header extends Component {
                       </CloseButton>
                       <NavLinksList>
                         <NavLinkElement
+                          onClick={() => close()}
                           isLinkActive={pathname === '/'}
                           isDarkTheme={isDarkTheme}
                         >
@@ -108,6 +109,7 @@ class Header extends Component {
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          onClick={() => close()}
                           isLinkActive={pathname === '/trending'}
                           isDarkTheme={isDarkTheme}
                         >
@@ -117,6 +119,7 @@ class Header extends Component {
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          onClick={() => close()}
                           isLinkActive={pathname === '/gaming'}
                           isDarkTheme={isDarkTheme}
                         >
@@ -126,6 +129,7 @@ class Header extends Component {
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          onClick={() => close()}
                           isLinkActive={pathname === '/saved-videos'}
                           isDarkTheme={isDarkTheme}
                         >

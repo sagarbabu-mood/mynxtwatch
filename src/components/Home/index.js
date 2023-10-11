@@ -1,12 +1,12 @@
 import {Component} from 'react'
 import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import Sidebar from '../Sidebar'
 import NxtWatchContext from '../../context/NxtWatchContext'
 import VideoItem from '../VideoItem'
+import FailureView from '../FailureView'
 
 import {
   HomeContainer,
@@ -23,19 +23,14 @@ import {
   SearchContainer,
   SearchInput,
   SearchButton,
-  LoaderViewContainer,
   HomeVideosContainer,
   NoSearchResultsViewContainer,
   NoSearchResultsViewImage,
   NoSearchResultsViewHeading,
   NoSearchResultsViewDescription,
   NoSearchResultsViewButton,
-  FailureViewContainer,
-  FailureViewImage,
-  FailureViewHeading,
-  FailureViewDescription,
-  FailureViewButton,
 } from './styledComponents'
+import LoadingView from '../LoadingView'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -122,12 +117,6 @@ class Home extends Component {
     this.setState({searchInput: event.target.value})
   }
 
-  displayLoaderView = () => (
-    <LoaderViewContainer data-testid="loader">
-      <Loader type="ThreeDots" color="#4f46e5" height="50" width="50" />
-    </LoaderViewContainer>
-  )
-
   onClickRetry = () => {
     this.getHomeVideos()
   }
@@ -175,39 +164,13 @@ class Home extends Component {
     return this.displayNoSearchResultsView()
   }
 
-  displayFailureView = () => (
-    <NxtWatchContext.Consumer>
-      {value => {
-        const {isDarkTheme} = value
-        const imageUrl = isDarkTheme
-          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
-          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
-        return (
-          <FailureViewContainer>
-            <FailureViewImage src={imageUrl} alt="failure view" />
-            <FailureViewHeading isDarkTheme={isDarkTheme}>
-              Oops! Something Went Wrong
-            </FailureViewHeading>
-            <FailureViewDescription isDarkTheme={isDarkTheme}>
-              We are having some trouble to complete your request. Please try
-              again.
-            </FailureViewDescription>
-            <FailureViewButton onClick={this.onClickRetry} type="button">
-              Retry
-            </FailureViewButton>
-          </FailureViewContainer>
-        )
-      }}
-    </NxtWatchContext.Consumer>
-  )
-
   renderHomeVideos = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
-        return this.displayLoaderView()
+        return <LoadingView />
       case apiStatusConstants.failure:
-        return this.displayFailureView()
+        return <FailureView onClickRetry={this.onClickRetry} />
       case apiStatusConstants.success:
         return this.displaySuccessView()
       default:
@@ -235,7 +198,10 @@ class Home extends Component {
                 <Sidebar />
                 <BannerAndHomeContainer>
                   {this.displayBanner()}
-                  <SearchAndHomeContainer isDarkTheme={isDarkTheme}>
+                  <SearchAndHomeContainer
+                    data-testid="home"
+                    isDarkTheme={isDarkTheme}
+                  >
                     <SearchContainer>
                       <SearchInput
                         onKeyDown={this.onEnterSearchInput}
