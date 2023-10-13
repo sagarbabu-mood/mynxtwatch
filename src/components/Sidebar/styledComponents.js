@@ -14,7 +14,7 @@ export const SidebarContainer = styled.div`
     display: none;
   }
   @media screen and (min-width: 800px) {
-    width: 25%;
+    width: 22%;
   }
 `
 

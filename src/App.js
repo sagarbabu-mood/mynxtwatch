@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Switch} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import './App.css'
 
@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import ProtectedRoute from './components/ProtectedRoute'
 import Trending from './components/Trending'
+import NotFound from './components/NotFound'
 
 class App extends Component {
   state = {
@@ -32,6 +33,8 @@ class App extends Component {
           <ProtectedRoute exact path="/login" component={LoginForm} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute path="/trending" component={Trending} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </NxtWatchContext.Provider>
     )

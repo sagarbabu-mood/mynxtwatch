@@ -22,6 +22,7 @@ export const TitleAndTrendingContainer = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+  height: 80px;
   padding: 20px;
   width: 100%;
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
@@ -35,8 +36,8 @@ export const TrendingIcon = styled.div`
   justify-content: center;
   align-items: center;
   border: none;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background-color: ${props => (props.isDarkTheme ? '#1e293b' : '#ffffff')};
   @media screen and (min-width: 768px) {
@@ -46,7 +47,7 @@ export const TrendingIcon = styled.div`
 `
 
 export const TrendingTitle = styled.h1`
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 600;
   padding-left: 20px;
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#0f0f0f')};
