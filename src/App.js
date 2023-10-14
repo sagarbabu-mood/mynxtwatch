@@ -29,6 +29,8 @@ class App extends Component {
         value={{
           isDarkTheme,
           toggleTheme: this.toggleTheme,
+          addToSavedVideo: this.addToSavedVideo,
+          removeSavedVideo: this.removeSavedVideo,
         }}
       >
         <Switch>

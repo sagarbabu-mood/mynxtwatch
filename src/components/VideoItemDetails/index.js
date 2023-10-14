@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import ReactPlayer from 'react-player'
 
 import NxtWatchContext from '../../context/NxtWatchContext'
 import Header from '../Header'
@@ -11,6 +12,7 @@ import {
   HomeContainer,
   SidebarAndHomeContainer,
   VideoItemDetailsContainer,
+  ReactPlayerContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -28,6 +30,7 @@ class VideoItemDetails extends Component {
   }
 
   getVideoItemDetails = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const {match} = this.props
     const {params} = match
     const {id} = params
@@ -57,7 +60,7 @@ class VideoItemDetails extends Component {
       }
       this.setState({
         videosDetails: formattedData,
-        apiStatus: apiStatusConstants.failure,
+        apiStatus: apiStatusConstants.success,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
@@ -66,9 +69,25 @@ class VideoItemDetails extends Component {
 
   onClickRetry = () => this.getVideoItemDetails()
 
-  displaySuccessView = () => <p>Sagar</p>
+  displaySuccessView = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+        const {videosDetails} = this.state
+        const {videoUrl} = videosDetails
+        return (
+          <ReactPlayerContainer>
+            <ReactPlayer
+              style={{width: '100vw', padding: '10px'}}
+              url={videoUrl}
+            />
+          </ReactPlayerContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
 
-  renderView = () => {
+  renderVideoDetails = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
@@ -98,7 +117,7 @@ class VideoItemDetails extends Component {
               <SidebarAndHomeContainer>
                 <Sidebar />
                 <VideoItemDetailsContainer isDarkTheme={isDarkTheme}>
-                  {this.renderView()}
+                  {this.renderVideoDetails()}
                 </VideoItemDetailsContainer>
               </SidebarAndHomeContainer>
             </HomeContainer>

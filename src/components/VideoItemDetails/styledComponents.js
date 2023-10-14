@@ -18,3 +18,9 @@ export const VideoItemDetailsContainer = styled.div`
   height: 86vh;
   overflow-y: auto; /* Add vertical scrollbar if content overflows */
 `
+
+export const ReactPlayerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
