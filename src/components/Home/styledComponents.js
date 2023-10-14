@@ -6,7 +6,9 @@ export const HomeContainer = styled.div`
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
+  background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
 `
+
 export const SidebarAndHomeContainer = styled.div`
   display: flex;
   min-height: 87vh;

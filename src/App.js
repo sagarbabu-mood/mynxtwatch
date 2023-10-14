@@ -8,7 +8,9 @@ import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import ProtectedRoute from './components/ProtectedRoute'
 import Trending from './components/Trending'
+import Gaming from './components/Gaming'
 import NotFound from './components/NotFound'
+import VideoItemDetails from './components/VideoItemDetails'
 
 class App extends Component {
   state = {
@@ -32,8 +34,14 @@ class App extends Component {
         <Switch>
           <ProtectedRoute exact path="/login" component={LoginForm} />
           <ProtectedRoute exact path="/" component={Home} />
-          <ProtectedRoute path="/trending" component={Trending} />
-          <Route path="/not-found" component={NotFound} />
+          <ProtectedRoute exact path="/trending" component={Trending} />
+          <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute
+            exact
+            path="/videos/:id"
+            component={VideoItemDetails}
+          />
+          <Route exact path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>
       </NxtWatchContext.Provider>
