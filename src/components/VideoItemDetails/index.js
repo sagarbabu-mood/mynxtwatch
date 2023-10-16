@@ -1,6 +1,5 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import ReactPlayer from 'react-player'
 
 import NxtWatchContext from '../../context/NxtWatchContext'
 import Header from '../Header'
@@ -8,11 +7,12 @@ import Sidebar from '../Sidebar'
 import LoadingView from '../LoadingView'
 import FailureView from '../FailureView'
 
+import DisplayVideoDetails from '../DisplayVideoDetails'
+
 import {
   HomeContainer,
   SidebarAndHomeContainer,
   VideoItemDetailsContainer,
-  ReactPlayerContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -23,7 +23,7 @@ const apiStatusConstants = {
 }
 
 class VideoItemDetails extends Component {
-  state = {videosDetails: {}}
+  state = {videoDetails: {}}
 
   componentDidMount() {
     this.getVideoItemDetails()
@@ -59,7 +59,7 @@ class VideoItemDetails extends Component {
         description: data.video_details.description,
       }
       this.setState({
-        videosDetails: formattedData,
+        videoDetails: formattedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -69,23 +69,11 @@ class VideoItemDetails extends Component {
 
   onClickRetry = () => this.getVideoItemDetails()
 
-  displaySuccessView = () => (
-    <NxtWatchContext.Consumer>
-      {value => {
-        const {isDarkTheme} = value
-        const {videosDetails} = this.state
-        const {videoUrl} = videosDetails
-        return (
-          <ReactPlayerContainer>
-            <ReactPlayer
-              style={{width: '100vw', padding: '10px'}}
-              url={videoUrl}
-            />
-          </ReactPlayerContainer>
-        )
-      }}
-    </NxtWatchContext.Consumer>
-  )
+  displaySuccessView = () => {
+    const {videoDetails} = this.state
+
+    return <DisplayVideoDetails videoDetails={videoDetails} />
+  }
 
   renderVideoDetails = () => {
     const {apiStatus} = this.state
@@ -102,8 +90,8 @@ class VideoItemDetails extends Component {
   }
 
   render() {
-    const {videosDetails} = this.state
-    console.log(videosDetails)
+    const {videoDetails} = this.state
+    console.log(videoDetails)
     return (
       <NxtWatchContext.Consumer>
         {value => {

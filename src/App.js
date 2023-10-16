@@ -34,7 +34,7 @@ class App extends Component {
         }}
       >
         <Switch>
-          <ProtectedRoute exact path="/login" component={LoginForm} />
+          <Route exact path="/login" component={LoginForm} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />

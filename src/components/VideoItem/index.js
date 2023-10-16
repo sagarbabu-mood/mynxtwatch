@@ -66,7 +66,9 @@ const VideoItem = props => {
                       <Dot2>
                         <BsDot />
                       </Dot2>
-                      <PublishedDate>{getPublishedDate()}</PublishedDate>
+                      <PublishedDate sDarkTheme={isDarkTheme}>
+                        {getPublishedDate()}
+                      </PublishedDate>
                     </ViewsAndPublishedContainer>
                   </VideoInfoContainer>
                 </VideoDetailsContainer>

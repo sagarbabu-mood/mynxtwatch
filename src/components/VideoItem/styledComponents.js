@@ -95,6 +95,11 @@ export const Dot2 = styled.p`
 `
 
 export const PublishedDate = styled.p`
-  margin: 0;
-  color: inherit;
+  font-size: 14px;
+  font-weight: 300px;
+  color: ${props => (props.fontColor ? '#475569' : ' #616e7c')};
+  background: none;
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+  }
 `
