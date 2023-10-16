@@ -52,7 +52,6 @@ class Gaming extends Component {
         thumbnailUrl: eachVideo.thumbnail_url,
         viewCount: eachVideo.view_count,
       }))
-      console.log(formattedData)
       this.setState({
         trendingVideos: formattedData,
         apiStatus: apiStatusConstants.success,

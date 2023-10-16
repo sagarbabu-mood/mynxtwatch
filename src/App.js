@@ -15,10 +15,38 @@ import VideoItemDetails from './components/VideoItemDetails'
 class App extends Component {
   state = {
     isDarkTheme: false,
+    savedVideos: [],
   }
 
   toggleTheme = () => {
     this.setState(prevState => ({isDarkTheme: !prevState.isDarkTheme}))
+  }
+
+  addToSavedVideo = video => {
+    console.log(video)
+    const {savedVideos} = this.state
+
+    const videoItem = savedVideos.find(eachVideo => eachVideo.id === video.id)
+    console.log(videoItem, savedVideos)
+
+    if (videoItem) {
+      this.setState(prevState => ({
+        savedVideos: prevState.savedVideos.map(eachVideoItem => {
+          if (videoItem.id === eachVideoItem.id) {
+            return {...eachVideoItem, isSaved: !eachVideoItem.isSaved}
+          }
+          return eachVideoItem
+        }),
+      }))
+    } else {
+      const updatedVideosList = [...savedVideos, video]
+
+      this.setState({savedVideos: updatedVideosList})
+    }
+  }
+
+  removeSavedVideo = id => {
+    console.log(id)
   }
 
   render() {

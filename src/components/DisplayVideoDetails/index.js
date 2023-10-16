@@ -18,6 +18,12 @@ import {
   Button,
   StyleContainer,
   HorizontalLine,
+  ChannelDetailsContainer,
+  ChannelImage,
+  ChannelNameAndSubscribersCountContainer,
+  ChannelName,
+  SubscribersCount,
+  Description,
 } from './styledComponents'
 
 const DisplayVideoDetails = props => {
@@ -27,10 +33,13 @@ const DisplayVideoDetails = props => {
     channel,
     description,
     publishedAt,
-    thumbnailUrl,
     videoUrl,
+    id,
     viewCount,
   } = videoDetails
+
+  const {name, profileImageUrl, subscriberCount} = channel
+
   const getPublishedDate = () => {
     const formatDate = formatDistanceToNow(new Date(publishedAt))
     const distanceArray = new Array(formatDate.split(' '))
@@ -41,7 +50,11 @@ const DisplayVideoDetails = props => {
   return (
     <NxtWatchContext.Consumer>
       {value => {
-        const {isDarkTheme} = value
+        const {isDarkTheme, addToSavedVideo, savedVideos} = value
+
+        const onClickSaveButton = () => {
+          addToSavedVideo(videoDetails)
+        }
         return (
           <VideoItemContainer>
             <ReactPlayerContainer>
@@ -73,13 +86,23 @@ const DisplayVideoDetails = props => {
                     <BiDislike />
                     Dislike
                   </Button>
-                  <Button>
+                  <Button onClick={onClickSaveButton}>
                     <BiListPlus />
                     Save
                   </Button>
                 </ButtonsContainer>
               </StyleContainer>
               <HorizontalLine />
+              <ChannelDetailsContainer>
+                <ChannelImage alt="channel logo" src={profileImageUrl} />
+                <ChannelNameAndSubscribersCountContainer>
+                  <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>
+                  <SubscribersCount isDarkTheme={isDarkTheme}>
+                    {subscriberCount} subscribers
+                  </SubscribersCount>
+                </ChannelNameAndSubscribersCountContainer>
+              </ChannelDetailsContainer>
+              <Description isDarkTheme={isDarkTheme}>{description}</Description>
             </VideoDetailsContainer>
           </VideoItemContainer>
         )

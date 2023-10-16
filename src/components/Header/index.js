@@ -38,7 +38,6 @@ import {
 class Header extends Component {
   onClickLogout = () => {
     const {history} = this.props
-    console.log('logged out')
     Cookies.remove('jwt_token')
     history.replace('/login')
   }

@@ -37,7 +37,7 @@ export const ChannelImage = styled.img`
   height: 40px;
   margin-top: 10px;
   @media screen and (max-width: 768px) {
-    margin-top: 8px;
+    margin-top: 14px;
   }
 `
 

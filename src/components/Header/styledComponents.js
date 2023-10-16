@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  min-width: 100vw;
   background-color: ${props => (props.isDarkTheme ? '#424242' : '#ffffff')};
   color: ${props => (props.isDarkTheme ? '#ffffff' : '#424242')};
   padding-left: 18px;

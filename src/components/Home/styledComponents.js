@@ -4,7 +4,7 @@ export const HomeContainer = styled.div`
   display: flex;
   font-family: 'Roboto';
   flex-direction: column;
-  width: 100vw;
+  min-width: 100vw;
   min-height: 100vh;
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
 `

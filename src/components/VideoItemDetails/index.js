@@ -90,8 +90,6 @@ class VideoItemDetails extends Component {
   }
 
   render() {
-    const {videoDetails} = this.state
-    console.log(videoDetails)
     return (
       <NxtWatchContext.Consumer>
         {value => {
