@@ -52,9 +52,14 @@ const DisplayVideoDetails = props => {
       {value => {
         const {isDarkTheme, addToSavedVideo, savedVideos} = value
 
+        const isSaved = savedVideos.find(each => each.id === id)
+          ? 'Saved'
+          : 'Save'
+
         const onClickSaveButton = () => {
           addToSavedVideo(videoDetails)
         }
+
         return (
           <VideoItemContainer>
             <ReactPlayerContainer>
@@ -88,7 +93,7 @@ const DisplayVideoDetails = props => {
                   </Button>
                   <Button onClick={onClickSaveButton}>
                     <BiListPlus />
-                    Save
+                    {isSaved}
                   </Button>
                 </ButtonsContainer>
               </StyleContainer>

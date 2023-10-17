@@ -11,6 +11,7 @@ import Trending from './components/Trending'
 import Gaming from './components/Gaming'
 import NotFound from './components/NotFound'
 import VideoItemDetails from './components/VideoItemDetails'
+import SavedVideos from './components/SavedVideos'
 
 class App extends Component {
   state = {
@@ -23,21 +24,15 @@ class App extends Component {
   }
 
   addToSavedVideo = video => {
-    console.log(video)
     const {savedVideos} = this.state
 
     const videoItem = savedVideos.find(eachVideo => eachVideo.id === video.id)
-    console.log(videoItem, savedVideos)
 
     if (videoItem) {
-      this.setState(prevState => ({
-        savedVideos: prevState.savedVideos.map(eachVideoItem => {
-          if (videoItem.id === eachVideoItem.id) {
-            return {...eachVideoItem, isSaved: !eachVideoItem.isSaved}
-          }
-          return eachVideoItem
-        }),
-      }))
+      const updatedVideosList = savedVideos.filter(
+        eachVideo => eachVideo.id !== video.id,
+      )
+      this.setState({savedVideos: updatedVideosList})
     } else {
       const updatedVideosList = [...savedVideos, video]
 
@@ -50,12 +45,13 @@ class App extends Component {
   }
 
   render() {
-    const {isDarkTheme} = this.state
+    const {isDarkTheme, savedVideos} = this.state
 
     return (
       <NxtWatchContext.Provider
         value={{
           isDarkTheme,
+          savedVideos,
           toggleTheme: this.toggleTheme,
           addToSavedVideo: this.addToSavedVideo,
           removeSavedVideo: this.removeSavedVideo,
@@ -71,6 +67,7 @@ class App extends Component {
             path="/videos/:id"
             component={VideoItemDetails}
           />
+          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <Route exact path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>
