@@ -50,12 +50,25 @@ const DisplayVideoDetails = props => {
   return (
     <NxtWatchContext.Consumer>
       {value => {
-        const {isDarkTheme, addToSavedVideo, savedVideos} = value
+        const {
+          isDarkTheme,
+          addToSavedVideo,
+          savedVideos,
+          likedVideos,
+          dislikedVideos,
+          likeVideo,
+          dislikeVideo,
+        } = value
 
         const isSaved = savedVideos.find(each => each.id === id)
           ? 'Saved'
           : 'Save'
 
+        const isLiked = likedVideos.find(each => each.id === id)
+
+        const isDisLiked = dislikedVideos.find(each => each.id === id)
+
+        console.log(isLiked, isDisLiked, 'sagar')
         const onClickSaveButton = () => {
           addToSavedVideo(videoDetails)
         }
@@ -83,15 +96,24 @@ const DisplayVideoDetails = props => {
                   </PublishedDate>
                 </ViewsAndPublishedContainer>
                 <ButtonsContainer>
-                  <Button>
+                  <Button
+                    onClick={() => likeVideo(videoDetails)}
+                    fontColor={isLiked ? '#2563eb' : '#64748b'}
+                  >
                     <AiOutlineLike />
                     Like
                   </Button>
-                  <Button>
+                  <Button
+                    fontColor={isDisLiked ? '#2563eb' : '#64748b'}
+                    onClick={() => dislikeVideo(videoDetails)}
+                  >
                     <BiDislike />
                     Dislike
                   </Button>
-                  <Button onClick={onClickSaveButton}>
+                  <Button
+                    fontColor={isSaved === 'Saved' ? '#2563eb' : '#64748b'}
+                    onClick={onClickSaveButton}
+                  >
                     <BiListPlus />
                     {isSaved}
                   </Button>

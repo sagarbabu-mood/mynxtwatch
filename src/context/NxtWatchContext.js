@@ -7,6 +7,8 @@ const ThemeContext = React.createContext({
   toggleTheme: () => {},
   likeVideo: () => {},
   dislikeVideo: () => {},
+  likedVideos: [],
+  dislikedVideos: [],
 })
 
 export default ThemeContext

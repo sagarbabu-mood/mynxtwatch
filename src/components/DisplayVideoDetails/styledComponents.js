@@ -82,7 +82,7 @@ export const Button = styled.button`
   background: none;
   margin-right: 5px;
   text-align: left;
-  color: ${props => props.isDarkTheme};
+  color: ${props => props.fontColor};
   @media screen and (min-width: 768px) {
     font-size: 18px;
     width: 80px;

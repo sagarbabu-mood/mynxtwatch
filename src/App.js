@@ -17,6 +17,8 @@ class App extends Component {
   state = {
     isDarkTheme: false,
     savedVideos: [],
+    likedVideos: [],
+    dislikedVideos: [],
   }
 
   toggleTheme = () => {
@@ -40,18 +42,60 @@ class App extends Component {
     }
   }
 
-  removeSavedVideo = id => {
-    console.log(id)
+  likeVideo = video => {
+    const {likedVideos, dislikedVideos} = this.state
+
+    const videoItem = likedVideos.find(eachVideo => eachVideo.id === video.id)
+
+    if (videoItem) {
+      const updatedVideosList = likedVideos.filter(
+        eachVideo => eachVideo.id !== video.id,
+      )
+      this.setState({likedVideos: updatedVideosList})
+    } else {
+      const updatedVideosList = dislikedVideos.filter(
+        eachVideo => eachVideo.id !== video.id,
+      )
+      this.setState({
+        likedVideos: [...likedVideos, video],
+        dislikedVideos: updatedVideosList,
+      })
+    }
+  }
+
+  dislikeVideo = video => {
+    const {dislikedVideos, likedVideos} = this.state
+    const videoItem = dislikedVideos.find(each => each.id === video.id)
+    if (videoItem) {
+      const filteredDislikedVideos = dislikedVideos.filter(
+        each => each.id !== video.id,
+      )
+      this.setState({
+        dislikedVideos: filteredDislikedVideos,
+      })
+    } else {
+      const filteredLikedVideos = likedVideos.filter(
+        each => each.id !== video.id,
+      )
+      this.setState({
+        dislikedVideos: [...dislikedVideos, video],
+        likedVideos: filteredLikedVideos,
+      })
+    }
   }
 
   render() {
-    const {isDarkTheme, savedVideos} = this.state
+    const {isDarkTheme, dislikedVideos, likedVideos, savedVideos} = this.state
 
     return (
       <NxtWatchContext.Provider
         value={{
           isDarkTheme,
           savedVideos,
+          likedVideos,
+          dislikedVideos,
+          likeVideo: this.likeVideo,
+          dislikeVideo: this.dislikeVideo,
           toggleTheme: this.toggleTheme,
           addToSavedVideo: this.addToSavedVideo,
           removeSavedVideo: this.removeSavedVideo,
