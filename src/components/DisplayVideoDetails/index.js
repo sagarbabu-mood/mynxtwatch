@@ -68,7 +68,6 @@ const DisplayVideoDetails = props => {
 
         const isDisLiked = dislikedVideos.find(each => each.id === id)
 
-        console.log(isLiked, isDisLiked, 'sagar')
         const onClickSaveButton = () => {
           addToSavedVideo(videoDetails)
         }

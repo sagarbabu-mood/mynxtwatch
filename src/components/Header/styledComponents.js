@@ -140,12 +140,11 @@ export const NavLinkElement = styled.li`
   text-decoration: none;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   width: 100vw;
   border: 0;
-  background-color: ${props =>
-    props.isLinkActive ? '#7e858e' : 'transparent'};
-  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#313131')};
+  background-color: ${props => props.selectedNavItemBgColor};
 `
 
 export const StyledLink = styled(Link)`
@@ -156,11 +155,13 @@ export const StyledLink = styled(Link)`
   align-items: center;
   text-align: left;
   width: 100vw;
+  color: ${props => props.selectedNavIconColor};
 `
 
 export const LinkContent = styled.p`
   margin-left: 6px;
   font-size: 16px;
+  color: ${props => props.textColor};
 `
 
 export const LogoutContainer = styled.div`
@@ -208,5 +209,7 @@ export const CustomButton = styled.button`
   margin-left: 10px;
   @media screen and (min-width: 768px) {
     font-size: 16px;
+    width: 80px;
+    height: 40px;
   }
 `

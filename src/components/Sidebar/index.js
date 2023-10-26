@@ -26,44 +26,82 @@ const Sidebar = props => {
     <NxtWatchContext.Consumer>
       {value => {
         const {isDarkTheme} = value
+        const themeBasedBgColor = isDarkTheme ? '#475569' : '#e2e8f0'
+        const themeBasedColor = isDarkTheme ? '#ffffff' : '#000000'
 
         return (
           <SidebarContainer isDarkTheme={isDarkTheme}>
             <NavLinksList>
               <NavLinkElement
+                selectedNavItemBgColor={
+                  pathname === '/' ? themeBasedBgColor : 'none'
+                }
                 isLinkActive={pathname === '/'}
                 isDarkTheme={isDarkTheme}
               >
-                <StyledLink to="/">
+                <StyledLink
+                  selectedNavIconColor={
+                    pathname === '/' ? '#ff0000' : themeBasedColor
+                  }
+                  to="/"
+                >
                   <AiFillHome size="20" />
-                  <LinkContent>Home</LinkContent>
+                  <LinkContent textColor={themeBasedColor}>Home</LinkContent>
                 </StyledLink>
               </NavLinkElement>
               <NavLinkElement
+                selectedNavItemBgColor={
+                  pathname === '/trending' ? themeBasedBgColor : 'none'
+                }
                 isLinkActive={pathname === '/trending'}
                 isDarkTheme={isDarkTheme}
               >
-                <StyledLink to="/trending">
+                <StyledLink
+                  selectedNavIconColor={
+                    pathname === '/trending' ? '#ff0000' : themeBasedColor
+                  }
+                  to="/trending"
+                >
                   <RiFireFill size="20" />
-                  <LinkContent>Trending</LinkContent>
+                  <LinkContent textColor={themeBasedColor}>
+                    Trending
+                  </LinkContent>
                 </StyledLink>
               </NavLinkElement>
               <NavLinkElement
+                selectedNavItemBgColor={
+                  pathname === '/gaming' ? themeBasedBgColor : 'none'
+                }
                 isLinkActive={pathname === '/gaming'}
                 isDarkTheme={isDarkTheme}
               >
-                <StyledLink to="/gaming">
+                <StyledLink
+                  selectedNavIconColor={
+                    pathname === '/gaming' ? '#ff0000' : themeBasedColor
+                  }
+                  to="/gaming"
+                >
                   <SiYoutubegaming size="20" />
-                  <LinkContent>Gaming</LinkContent>
+                  <LinkContent textColor={themeBasedColor}>Gaming</LinkContent>
                 </StyledLink>
               </NavLinkElement>
               <NavLinkElement
+                selectedNavItemBgColor={
+                  pathname === '/saved-videos' ? themeBasedBgColor : 'none'
+                }
                 isLinkActive={pathname === '/saved-videos'}
                 isDarkTheme={isDarkTheme}
               >
-                <StyledLink to="/saved-videos">
+                <StyledLink
+                  selectedNavIconColor={
+                    pathname === '/saved-videos' ? '#ff0000' : themeBasedColor
+                  }
+                  to="/saved-videos"
+                >
                   <RiPlayListAddFill size="20" />
-                  <LinkContent>Saved Videos</LinkContent>
+                  <LinkContent textColor={themeBasedColor}>
+                    Saved Videos
+                  </LinkContent>
                 </StyledLink>
               </NavLinkElement>
             </NavLinksList>

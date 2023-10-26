@@ -61,6 +61,9 @@ class Header extends Component {
             toggleTheme()
           }
 
+          const themeBasedColor = isDarkTheme ? '#ffffff' : '#000000'
+          const themeBasedBgColor = isDarkTheme ? '#475569' : '#e2e8f0'
+
           return (
             <HeaderContainer isDarkTheme={isDarkTheme}>
               <Link to="/">
@@ -98,46 +101,96 @@ class Header extends Component {
                       </CloseButton>
                       <NavLinksList>
                         <NavLinkElement
+                          selectedNavItemBgColor={
+                            pathname === '/' ? themeBasedBgColor : 'none'
+                          }
                           onClick={() => close()}
                           isLinkActive={pathname === '/'}
                           isDarkTheme={isDarkTheme}
                         >
-                          <StyledLink isDarkTheme={isDarkTheme} to="/">
+                          <StyledLink
+                            selectedNavIconColor={
+                              pathname === '/' ? '#ff0000' : themeBasedColor
+                            }
+                            isDarkTheme={isDarkTheme}
+                            to="/"
+                          >
                             <AiFillHome size="20" />
-                            <LinkContent>Home</LinkContent>
+                            <LinkContent textColor={themeBasedColor}>
+                              Home
+                            </LinkContent>
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          selectedNavItemBgColor={
+                            pathname === '/trending'
+                              ? themeBasedBgColor
+                              : 'none'
+                          }
                           onClick={() => close()}
                           isLinkActive={pathname === '/trending'}
                           isDarkTheme={isDarkTheme}
                         >
-                          <StyledLink isDarkTheme={isDarkTheme} to="/trending">
+                          <StyledLink
+                            selectedNavIconColor={
+                              pathname === '/trending'
+                                ? '#ff0000'
+                                : themeBasedColor
+                            }
+                            isDarkTheme={isDarkTheme}
+                            to="/trending"
+                          >
                             <RiFireFill size="20" />
-                            <LinkContent>Trending</LinkContent>
+                            <LinkContent textColor={themeBasedColor}>
+                              Trending
+                            </LinkContent>
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          selectedNavItemBgColor={
+                            pathname === '/gaming' ? themeBasedBgColor : 'none'
+                          }
                           onClick={() => close()}
                           isLinkActive={pathname === '/gaming'}
                           isDarkTheme={isDarkTheme}
                         >
-                          <StyledLink isDarkTheme={isDarkTheme} to="/gaming">
+                          <StyledLink
+                            selectedNavIconColor={
+                              pathname === '/gaming'
+                                ? '#ff0000'
+                                : themeBasedColor
+                            }
+                            isDarkTheme={isDarkTheme}
+                            to="/gaming"
+                          >
                             <SiYoutubegaming size="20" />
-                            <LinkContent>Gaming</LinkContent>
+                            <LinkContent textColor={themeBasedColor}>
+                              Gaming
+                            </LinkContent>
                           </StyledLink>
                         </NavLinkElement>
                         <NavLinkElement
+                          selectedNavItemBgColor={
+                            pathname === '/saved-videos'
+                              ? themeBasedBgColor
+                              : 'none'
+                          }
                           onClick={() => close()}
                           isLinkActive={pathname === '/saved-videos'}
-                          isDarkTheme={isDarkTheme}
                         >
                           <StyledLink
+                            selectedNavIconColor={
+                              pathname === '/saved-videos'
+                                ? '#ff0000'
+                                : themeBasedColor
+                            }
                             isDarkTheme={isDarkTheme}
                             to="/saved-videos"
                           >
                             <RiPlayListAddFill size="20" />
-                            <LinkContent>Saved Videos</LinkContent>
+                            <LinkContent textColor={themeBasedColor}>
+                              Saved Videos
+                            </LinkContent>
                           </StyledLink>
                         </NavLinkElement>
                       </NavLinksList>
@@ -161,6 +214,37 @@ class Header extends Component {
                       >
                         <FiLogOut />
                       </LogoutImageButton>
+                    </div>
+                  }
+                  className="popup-content"
+                >
+                  {close => (
+                    <LogoutContainer isDarkTheme={isDarkTheme}>
+                      <LogoutPopupText isDarkTheme={isDarkTheme}>
+                        Are you sure you want to logout?
+                      </LogoutPopupText>
+                      <LogoutButtonsContainer>
+                        <CustomButton
+                          type="button"
+                          outLine
+                          onClick={() => close()}
+                        >
+                          Cancel
+                        </CustomButton>
+                        <CustomButton
+                          onClick={this.onClickLogout}
+                          type="button"
+                        >
+                          Confirm
+                        </CustomButton>
+                      </LogoutButtonsContainer>
+                    </LogoutContainer>
+                  )}
+                </Popup>
+                <Popup
+                  modal
+                  trigger={
+                    <div>
                       <LogoutButton type="button" isDarkTheme={isDarkTheme}>
                         Logout
                       </LogoutButton>
@@ -185,7 +269,7 @@ class Header extends Component {
                           onClick={this.onClickLogout}
                           type="button"
                         >
-                          Logout
+                          Confirm
                         </CustomButton>
                       </LogoutButtonsContainer>
                     </LogoutContainer>

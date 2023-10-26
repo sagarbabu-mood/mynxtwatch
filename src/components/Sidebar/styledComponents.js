@@ -35,9 +35,7 @@ export const NavLinkElement = styled.li`
   border: 0;
   width: 100%;
   padding-left: 20px;
-  background-color: ${props =>
-    props.isLinkActive ? '#7e858e' : 'transparent'};
-  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#313131')};
+  background-color: ${props => props.selectedNavItemBgColor};
 `
 
 export const StyledLink = styled(Link)`
@@ -47,11 +45,13 @@ export const StyledLink = styled(Link)`
   flex-direction: row;
   align-items: center;
   text-align: left;
+  color: ${props => props.selectedNavIconColor};
 `
 
 export const LinkContent = styled.p`
   margin-left: 10px;
   font-size: 16px;
+  color: ${props => props.textColor};
 `
 
 export const ContactsContainer = styled.div`

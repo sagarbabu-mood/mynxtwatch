@@ -64,11 +64,12 @@ export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 10px 0px 10px;
+  padding: 0 10px 0px 0px;
 `
 
 export const Button = styled.button`
   display: flex;
+  font-size: 12px;
   justify-content: center;
   align-items: center;
   gap: 5px;
@@ -84,7 +85,7 @@ export const Button = styled.button`
   text-align: left;
   color: ${props => props.fontColor};
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: 16px;
     width: 80px;
     text-align: center;
     margin-right: 10px;
