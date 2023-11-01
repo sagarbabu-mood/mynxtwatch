@@ -44,7 +44,7 @@ class Trending extends Component {
     }
 
     const response = await fetch(apiUrl, options)
-    if (response.ok) {
+    if (!response.ok) {
       const data = await response.json()
       const formattedData = data.videos.map(eachVideo => ({
         id: eachVideo.id,
