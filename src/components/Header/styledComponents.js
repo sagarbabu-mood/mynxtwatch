@@ -91,7 +91,6 @@ export const LogoutButton = styled.button`
   border: 1px solid ${props => (props.isDarkTheme ? '#ffffff' : '#3b82f6')};
   border-radius: 2px;
   color: ${props => (props.isDarkTheme ? '#ffffff' : '#3b82f6')};
-  display: none;
   margin-bottom: 8px;
   cursor: pointer;
   outline: none;
@@ -99,10 +98,11 @@ export const LogoutButton = styled.button`
   padding: 8px 16px;
   font-weight: 600;
   font-size: 17px;
-  @media screen and (min-width: 768px) {
-    display: flex;
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `
+
 export const ModalContainer = styled.div`
   width: 100vw;
   height: 100vh;

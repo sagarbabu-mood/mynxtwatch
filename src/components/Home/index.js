@@ -41,7 +41,7 @@ const apiStatusConstants = {
 
 class Home extends Component {
   state = {
-    display: 'flex',
+    display: true,
     searchInput: '',
     apiStatus: apiStatusConstants.initial,
   }
@@ -85,31 +85,33 @@ class Home extends Component {
   }
 
   onClickDisplay = () => {
-    this.setState({display: 'none'})
+    this.setState({display: false})
   }
 
   displayBanner = () => {
     const {display} = this.state
     return (
-      <BannerContainer data-testid="banner" display={display}>
-        <LeftPart>
-          <BannerImage
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="nxt watch logo"
-          />
-          <BannerText>Buy Nxt Watch Premium</BannerText>
-          <BannerButton type="button">GET IT NOW</BannerButton>
-        </LeftPart>
-        <BannerRight>
-          <BannerCloseButton
-            type="button"
-            data-testid="close"
-            onClick={this.onClickDisplay}
-          >
-            <AiOutlineClose size={20} />
-          </BannerCloseButton>
-        </BannerRight>
-      </BannerContainer>
+      display && (
+        <BannerContainer data-testid="banner">
+          <LeftPart>
+            <BannerImage
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+              alt="nxt watch logo"
+            />
+            <BannerText>Buy Nxt Watch Premium</BannerText>
+            <BannerButton type="button">GET IT NOW</BannerButton>
+          </LeftPart>
+          <BannerRight>
+            <BannerCloseButton
+              type="button"
+              data-testid="close"
+              onClick={this.onClickDisplay}
+            >
+              <AiOutlineClose size={20} />
+            </BannerCloseButton>
+          </BannerRight>
+        </BannerContainer>
+      )
     )
   }
 

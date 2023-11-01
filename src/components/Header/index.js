@@ -47,7 +47,6 @@ class Header extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const {isDarkTheme, toggleTheme} = value
-          console.log(isDarkTheme)
           const loginImageUrl = isDarkTheme
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
@@ -221,7 +220,7 @@ class Header extends Component {
                   {close => (
                     <LogoutContainer isDarkTheme={isDarkTheme}>
                       <LogoutPopupText isDarkTheme={isDarkTheme}>
-                        Are you sure you want to logout?
+                        Are you sure, you want to logout
                       </LogoutPopupText>
                       <LogoutButtonsContainer>
                         <CustomButton
@@ -255,7 +254,7 @@ class Header extends Component {
                   {close => (
                     <LogoutContainer isDarkTheme={isDarkTheme}>
                       <LogoutPopupText isDarkTheme={isDarkTheme}>
-                        Are you sure you want to logout?
+                        Are you sure, you want to logout
                       </LogoutPopupText>
                       <LogoutButtonsContainer>
                         <CustomButton
